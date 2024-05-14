@@ -3,11 +3,37 @@ import Image from 'next/image'
 import statue from '../images/statue.png'
 import { Figtree } from 'next/font/google'
 import { Cormorant } from 'next/font/google'
+import {client} from "@utils/sanity"
 
 const figtree = Figtree({ subsets: ['latin'] })
 const cormorant = Cormorant({ subsets: ['latin']})
 
+async function getContent() {
+  const CONTENT_QUERY = `*[_type == "place"] {
+  ...,
+  location {
+    ...
+  },
+  image {
+    ...,
+    asset->
+  },
+  content[] {
+    _type,
+    ...,
+    defined(string) => string
+  },
+  oralHistories[]->
+}`
+    const content = await client.fetch(CONTENT_QUERY);
+    return content
+}
+
 export default function Home() {
+    // Fetch content with GROQ
+    getContent().then(content => console.log('sanity debug: ', content));
+    
+
   return (
     <main className="min-h-screen flex flex-col">
     <nav className="flex flex-col items-center w-fit py-2 px-2 sm:py-8 sm:px-16">
