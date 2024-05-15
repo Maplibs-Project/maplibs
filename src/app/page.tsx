@@ -3,7 +3,7 @@ import Image from 'next/image'
 import statue from '../images/statue.png'
 import { Figtree } from 'next/font/google'
 import { Cormorant } from 'next/font/google'
-import { client } from '../utils/sanity/client'
+import { client } from '@/utils/sanity/client'
 
 const figtree = Figtree({ subsets: ['latin'] })
 const cormorant = Cormorant({ subsets: ['latin']})
