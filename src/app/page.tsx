@@ -64,7 +64,7 @@ export default function Home() {
       </Link>
       <Link href="/views">
       <div className="bg-blue-500 bg-opacity-30 rounded-full flex items-center text-center justify-center cursor-pointer" style={{width: '200px', height: '200px'}}>
-        <p className="text-slate-100">Explore a View of Chirag</p>
+        <p className="text-slate-100">Explore a View of Bronzeville</p>
       </div>
       </Link>
       
