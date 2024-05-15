@@ -3,7 +3,7 @@ import Image from 'next/image'
 import statue from '../images/statue.png'
 import { Figtree } from 'next/font/google'
 import { Cormorant } from 'next/font/google'
-import {client} from "@utils/sanity"
+import { client } from '../utils/sanity/client'
 
 const figtree = Figtree({ subsets: ['latin'] })
 const cormorant = Cormorant({ subsets: ['latin']})
@@ -64,7 +64,7 @@ export default function Home() {
       </Link>
       <Link href="/views">
       <div className="bg-blue-500 bg-opacity-30 rounded-full flex items-center text-center justify-center cursor-pointer" style={{width: '200px', height: '200px'}}>
-        <p className="text-slate-100">Explore a View of Bronzeville</p>
+        <p className="text-slate-100">Explore a View of Chirag</p>
       </div>
       </Link>
       
