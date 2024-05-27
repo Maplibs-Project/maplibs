@@ -8,18 +8,31 @@ import { useState, useEffect, JSX } from 'react'
 let text1: JSX.Element;
 let text2: JSX.Element;
 
+interface Reflection {
+    neighborhood: string,
+    place: string,
+    sound: string,
+    smell: string,
+    event: string,
+    street_corner_object: string,
+    first_name: string,
+    email: string,
+}
+
 export default function Maplib() {
     const [isMenuVisible, setMenuVisible] = useState(true);
     const [selectedTab, setSelectedTab] = useState('instructions');
     const [text, setText] = useState(text1);
-    const [term, setTerm] = useState('');
+
+    const reflection: Partial<Reflection> = {};
+    const [form, setForm] = useState(reflection);
 
     // const isMobile = window.innerWidth <= 768; 
     const bulletPoint = String.fromCodePoint(0x022C6)
 
     const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("SUBMIT: ", term);
+        console.log("SUBMIT: ", form);
     }
 
     function changeInfo () {
@@ -67,13 +80,19 @@ export default function Maplib() {
                 </div>
                 <div className="pt-4sm:pt-1 sm:px-4 flex flex-col items-center">
                     <form className="px-4 py-4 border-2 border-black w-11/12 text-black leading-10" onSubmit={submitForm}>
-                        <p>I live in <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="a neighborhood"></input>. My neighborhood feels like a community when I go to
-                         <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="a place"></input>, hear <input type="text" placeholder="a sound"></input>, and smell
-                        <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="a smell"></input>. I wish more people knew about the history of <input className="mr-1" type="text" placeholder="an event"></input> 
-                         in this neighborhood. In the future, I hope every street corner has <input type="text" placeholder="an object"></input>.</p>
+                        <p>
+                            I live in <input onChange={(e) => setForm({...form, neighborhood: e.target.value})} type="text" placeholder="a neighborhood"></input>. 
+                            My neighborhood feels like a community when I go to
+                            <input onChange={(e) => setForm({...form, place: e.target.value})} type="text" placeholder="a place"></input>, 
+                            hear <input onChange={(e) => setForm({...form, sound: e.target.value})} type="text" placeholder="a sound"></input>, 
+                            and smell <input onChange={(e) => setForm({...form, smell: e.target.value})} type="text" placeholder="a smell"></input>. 
+                            I wish more people knew about the history of <input onChange={(e) => setForm({...form, event: e.target.value})} className="mr-1" type="text" placeholder="an event"></input> 
+                            in this neighborhood. In the future, I hope every street corner has 
+                            <input onChange={(e) => setForm({...form, street_corner_object: e.target.value})} type="text" placeholder="an object"></input>.
+                         </p>
                         <div className="flex flex-col gap-5 sm:gap-0 sm:flex-row sm:justify-between py-4">
-                        <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="First Name"></input>
-                        <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Email"></input> 
+                        <input onChange={(e) => setForm({...form, first_name: e.target.value})} type="text" placeholder="First Name"></input>
+                        <input onChange={(e) => setForm({...form, email: e.target.value})} type="text" placeholder="Email"></input> 
                         </div>
 
                         <div className="mt-4 pb-6 flex justify-center gap-4 text-black cursor-pointer">
