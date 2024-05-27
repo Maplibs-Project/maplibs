@@ -12,9 +12,15 @@ export default function Maplib() {
     const [isMenuVisible, setMenuVisible] = useState(true);
     const [selectedTab, setSelectedTab] = useState('instructions');
     const [text, setText] = useState(text1);
+    const [term, setTerm] = useState('');
 
     // const isMobile = window.innerWidth <= 768; 
     const bulletPoint = String.fromCodePoint(0x022C6)
+
+    const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log("SUBMIT: ", term);
+    }
 
     function changeInfo () {
         if (selectedTab === 'instructions') {
@@ -60,22 +66,23 @@ export default function Maplib() {
                     />
                 </div>
                 <div className="pt-4sm:pt-1 sm:px-4 flex flex-col items-center">
-                    <form className="px-4 py-4 border-2 border-black w-11/12 text-black leading-10">
-                        <p>I live in <input type="text" placeholder="a neighborhood"></input>. My neighborhood feels like a community when I go to
-                         <input type="text" placeholder="a place"></input>, hear <input type="text" placeholder="a sound"></input>, and smell
-                        <input type="text" placeholder="a smell"></input>. I wish more people knew about the history of <input className="mr-1" type="text" placeholder="an event"></input> 
+                    <form className="px-4 py-4 border-2 border-black w-11/12 text-black leading-10" onSubmit={submitForm}>
+                        <p>I live in <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="a neighborhood"></input>. My neighborhood feels like a community when I go to
+                         <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="a place"></input>, hear <input type="text" placeholder="a sound"></input>, and smell
+                        <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="a smell"></input>. I wish more people knew about the history of <input className="mr-1" type="text" placeholder="an event"></input> 
                          in this neighborhood. In the future, I hope every street corner has <input type="text" placeholder="an object"></input>.</p>
                         <div className="flex flex-col gap-5 sm:gap-0 sm:flex-row sm:justify-between py-4">
-                        <input type="text" placeholder="First Name"></input>
-                        <input type="text" placeholder="Email"></input> 
+                        <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="First Name"></input>
+                        <input value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Email"></input> 
                         </div>
-                    </form>
-                    <div className="mt-4 pb-6 flex justify-center gap-4 text-black cursor-pointer">
+
+                        <div className="mt-4 pb-6 flex justify-center gap-4 text-black cursor-pointer">
                         <label className="border-2 border-black w-20 h-8 flex justify-center items-center rounded-xl" htmlFor="upload">Upload</label>
                         <input type="file" id="upload" name="upload" hidden></input>
                         <button className="text-black border-2 border-black w-20 h-8 flex justify-center items-center rounded-xl" type="submit" id="submit">Submit</button>
-                        {/* <button className="text-black border-2 border-black w-24 h-8 flex justify-center items-center rounded-xl" id="example">Example</button> */}
                     </div>
+                    </form>
+
                 </div>
             </div>
 
