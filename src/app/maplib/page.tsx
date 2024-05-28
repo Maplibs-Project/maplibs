@@ -8,7 +8,7 @@ import { useState, useEffect, JSX } from 'react'
 let text1: JSX.Element;
 let text2: JSX.Element;
 
-interface Reflection {
+type Reflection = {
     neighborhood: string,
     place: string,
     sound: string,
@@ -17,6 +17,17 @@ interface Reflection {
     street_corner_object: string,
     first_name: string,
     email: string,
+}
+
+async function createReflection(reflection: Partial<Reflection>) {
+    console.log("Create Reflection: ", reflection)
+    const response = await fetch("/api/reflections", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reflection),
+    });
+    return response;
 }
 
 export default function Maplib() {
@@ -32,7 +43,10 @@ export default function Maplib() {
 
     const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("SUBMIT: ", form);
+
+        createReflection(form).then((data) => {
+            console.log("DEUBG DATA: ", data);
+        })
     }
 
     function changeInfo () {
