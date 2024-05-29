@@ -1,7 +1,7 @@
 // route.ts
 
 import { client } from '@/utils/sanity/client'
-
+import { Reflection } from '@/app/models/reflection'
 
 export const dynamic = 'force-dynamic' // defaults to auto
 
@@ -11,10 +11,21 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-    const reflection = await request.json()
-    reflection['_type'] = 'reflection'
+    const data = await request.json()
 
-    // TODO: this needs to be created into a proper object
+    console.log("debug: ", data)
+    let reflection = new Reflection()
+
+    // TODO: do this better
+    reflection.neighborhood = data.neighborhood
+    reflection.place = data.place
+    reflection.sound = data.sound
+    reflection.smell = data.smell
+    reflection.event = data.event
+    reflection.street_corner_object = data.street_corner_object
+    reflection.first_name = data.first_name
+    reflection.email = data.email
+
     client.create(reflection).then((res) => {
         console.log("reflection create resp:\n", res)
       })
