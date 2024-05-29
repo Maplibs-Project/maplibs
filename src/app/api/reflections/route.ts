@@ -12,8 +12,11 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     const reflection = await request.json()
+    reflection['_type'] = 'reflection'
 
     // TODO: this needs to be created into a proper object
-    client.create(reflection)
+    client.create(reflection).then((res) => {
+        console.log("reflection create resp:\n", res)
+      })
     return new Response('OK');
 }

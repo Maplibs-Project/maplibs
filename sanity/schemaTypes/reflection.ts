@@ -42,7 +42,7 @@ export default defineType({
         type: 'string',
     }),
     defineField({
-        name: 'Email',
+        name: 'email',
         title: 'Email',
         type: 'email',
     }),
